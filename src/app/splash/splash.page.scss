@@ -1,0 +1,72 @@
+$typing-speed: 0.1s;
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: black;
+  }
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(0.8); /* Inicia un poco más pequeño */
+    opacity: 0; /* Comienza invisible */
+  }
+  50% {
+    opacity: 1; /* Se vuelve visible */
+  }
+  100% {
+    transform: scale(1); /* Vuelve al tamaño normal */
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Ubuntu";
+  margin-right: 30px;
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+  margin-left: 15px;
+  animation: zoom 1s ease-in-out forwards; /* Aplica la animación de zoom */
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.typing {
+  font-size: 24px;
+  color: #333;
+  white-space: normal;
+  overflow: hidden;
+  border-right: 2px solid;
+  width: 100%;
+  display: inline-block;
+  animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+.typing + h6 {
+  font-size: 16px;
+  margin-top: 10px;
+  animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+}

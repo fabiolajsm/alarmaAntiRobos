@@ -1,0 +1,74 @@
+<ion-content>
+  <div class="container">
+    <ion-title>Inicio de sesión</ion-title>
+
+    <h2 class="text-access">Acceso rápido</h2>
+    <div class="buttons-container">
+      <button
+        class="btn"
+        (click)="handleQuickAccess('admin@admin.com','111111')"
+      >
+        Admin
+      </button>
+      <button
+        class="btn"
+        (click)="handleQuickAccess('invitado@invitado.com','222222')"
+      >
+        Invitado
+      </button>
+      <button
+        class="btn"
+        (click)="handleQuickAccess('usuario@usuario.com','333333')"
+      >
+        Usuario
+      </button>
+      <button
+        class="btn"
+        (click)="handleQuickAccess('anonimo@anonimo.com', '444444')"
+      >
+        Anónimo
+      </button>
+      <button
+        class="btn"
+        (click)="handleQuickAccess('tester@tester.com', '555555')"
+      >
+        Tester
+      </button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+      <ion-input
+        id="email"
+        formControlName="email"
+        type="email"
+        label="Email"
+        (input)="onInputChange()"
+      />
+      <ion-input
+        color="dark"
+        id="password"
+        formControlName="password"
+        type="password"
+        label="Password"
+        (input)="onInputChange()"
+      >
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+      <p class="text-center text-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </p>
+
+      <button id="button" type="submit">Iniciar sesión</button>
+    </form>
+  </div>
+</ion-content>
+
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#d9d9d9"
+  type="line-spin-clockwise-fade"
+  [fullScreen]="true"
+>
+  <p style="color: #d9d9d9; font-family: Roboto">Cargando...</p>
+</ngx-spinner>
