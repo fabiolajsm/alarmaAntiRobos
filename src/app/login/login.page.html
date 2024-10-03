@@ -38,18 +38,22 @@
 
     <form [formGroup]="form" (ngSubmit)="handleSubmit()">
       <ion-input
+        color="dark"
         id="email"
         formControlName="email"
         type="email"
         label="Email"
+        placeholder="hola@gmail.com"
         (input)="onInputChange()"
       />
+      <br />
       <ion-input
         color="dark"
         id="password"
         formControlName="password"
         type="password"
         label="Password"
+        placeholder="unacontraseña"
         (input)="onInputChange()"
       >
         <ion-input-password-toggle slot="end"></ion-input-password-toggle>
