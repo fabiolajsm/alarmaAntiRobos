@@ -1,8 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title> Alarma anti robos </ion-title>
+    <ion-button slot="end" fill="clear" color="primary">
+      <ion-icon aria-hidden="true" color="primary" name="arrow-redo-outline" />
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +15,9 @@
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <strong>¿Listo para activar tu alarma anti robos?</strong>
+    <ion-button class="alarmBtn" color="light" slot="center">
+      <img src="assets/logo.png" alt="logo" class="logo" />
+    </ion-button>
   </div>
 </ion-content>
