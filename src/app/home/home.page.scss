@@ -25,3 +25,24 @@ ion-title {
 .alarmBtn {
   margin-top: 30px;
 }
+
+/* Media query para orientación horizontal */
+@media (orientation: landscape) {
+  #container {
+    display: flex;
+    flex-direction: column;
+  }
+  #container img {
+    width: 150px;
+    height: 160px;
+  }
+  #container strong {
+    margin-top: 20px;
+  }
+  .alarmBtn {
+    margin: 20px auto;
+  }
+  ion-title {
+    font-size: 20px;
+  }
+}
