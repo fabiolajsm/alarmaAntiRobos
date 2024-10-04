@@ -13,7 +13,11 @@ import { Firestore } from '@angular/fire/firestore';
 })
 export class AuthService {
   firestore = inject(Firestore);
-  constructor(private firebaseAuth: Auth, private router: Router) {}
+  firebaseAuth = inject(Auth);
+
+  userCollectionName = 'users';
+  historyCollectionName = 'loginHistory';
+  constructor(private router: Router) {}
 
   login(email: string, password: string) {
     const promise = signInWithEmailAndPassword(
@@ -29,9 +33,15 @@ export class AuthService {
   }
 
   getCurrentUserEmail() {
-    return getAuth().currentUser?.email;
+    const user = this.firebaseAuth.currentUser;
+    if (user) {
+      console.log(user, 'userr');
+      return user.email;
+    } else {
+      console.warn('No hay un usuario autenticado.');
+      return null; // o algún valor por defecto
+    }
   }
-
   getUserByEmail(email: string): Observable<UserInterface | undefined> {
     const usersRef = collection(this.firestore, 'users');
     const q = query(usersRef, where('correo', '==', email));

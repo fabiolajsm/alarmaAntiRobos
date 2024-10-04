@@ -1,7 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title> Alarma anti robos </ion-title>
-    <ion-button slot="end" fill="clear" color="primary">
+    <ion-button
+      color="primary"
+      fill="clear"
+      slot="end"
+      (click)="handleLogout()"
+    >
       <ion-icon aria-hidden="true" color="primary" name="arrow-redo-outline" />
     </ion-button>
   </ion-toolbar>
@@ -16,8 +21,23 @@
 
   <div id="container">
     <strong>¿Listo para activar tu alarma anti robos?</strong>
-    <ion-button class="alarmBtn" color="light" slot="center">
+    <ion-button
+      class="alarmBtn"
+      [color]="isDetectorActive ? 'success' : 'light'"
+      slot="center"
+      (click)="toggleDetector()"
+    >
       <img src="assets/logo.png" alt="logo" class="logo" />
     </ion-button>
   </div>
 </ion-content>
+
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  color="#d9d9d9"
+  size="medium"
+  type="line-spin-clockwise-fade"
+  [fullScreen]="true"
+>
+  <p style="color: #d9d9d9; font-family: Roboto">Cargando...</p>
+</ngx-spinner>
