@@ -1,11 +1,15 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import {
+  Auth,
+  authState,
+  signInWithEmailAndPassword,
+} from '@angular/fire/auth';
 import { collection, getDocs, query, where } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { getAuth } from 'firebase/auth';
 
 import { UserInterface } from '../interfaces/user.interface';
-import { Observable, from } from 'rxjs';
+import { Observable, from, map, of, switchMap } from 'rxjs';
 import { Firestore } from '@angular/fire/firestore';
 
 @Injectable({
@@ -32,16 +36,20 @@ export class AuthService {
     this.firebaseAuth.signOut().then(() => this.router.navigate(['login']));
   }
 
-  getCurrentUserEmail() {
-    const user = this.firebaseAuth.currentUser;
-    if (user) {
-      console.log(user, 'userr');
-      return user.email;
-    } else {
-      console.warn('No hay un usuario autenticado.');
-      return null; // o algún valor por defecto
-    }
+  getCurrentUser(): Observable<UserInterface | undefined> {
+    return authState(this.firebaseAuth).pipe(
+      switchMap((user) => {
+        if (user) {
+          return this.getUserByEmail(user.email!).pipe(
+            map((userData) => userData)
+          );
+        } else {
+          return of(undefined);
+        }
+      })
+    );
   }
+
   getUserByEmail(email: string): Observable<UserInterface | undefined> {
     const usersRef = collection(this.firestore, 'users');
     const q = query(usersRef, where('correo', '==', email));

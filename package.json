@@ -30,9 +30,11 @@
     "@capacitor/status-bar": "6.0.1",
     "@capgo/capacitor-flash": "^6.0.3",
     "@ionic/angular": "^8.0.0",
+    "firebase": "^10.14.0",
     "ionicons": "^7.2.1",
     "ngx-spinner": "^17.0.0",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.14.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },

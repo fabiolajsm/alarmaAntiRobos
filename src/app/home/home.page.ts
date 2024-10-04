@@ -11,12 +11,12 @@ import {
 import { addIcons } from 'ionicons';
 import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
 import { AuthService } from '../services/auth.service';
-import { AlertController } from '@ionic/angular';
 import { PluginListenerHandle } from '@capacitor/core';
 import { CapacitorFlash } from '@capgo/capacitor-flash';
 import { Motion, MotionEventResult } from '@capacitor/motion';
 import { Haptics } from '@capacitor/haptics';
 import { UserInterface } from '../interfaces/user.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -34,8 +34,7 @@ import { UserInterface } from '../interfaces/user.interface';
   ],
 })
 export class HomePage implements OnInit, OnDestroy {
-  private email: string = '';
-  private usuario: UserInterface | undefined;
+  private currentUser: UserInterface | undefined;
 
   private accelHandler: PluginListenerHandle | null = null;
   public audio: HTMLAudioElement = new Audio();
@@ -44,11 +43,7 @@ export class HomePage implements OnInit, OnDestroy {
   private lastTriggerCall: string = '';
   private timerId: any;
 
-  constructor(
-    private alertController: AlertController,
-    public auth: AuthService,
-    public spinner: NgxSpinnerService
-  ) {
+  constructor(public auth: AuthService, public spinner: NgxSpinnerService) {
     addIcons({ arrowRedoOutline });
   }
 
@@ -58,14 +53,8 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const email = this.auth.getCurrentUserEmail();
-    if (!email) return;
-    console.log(email, 'emaill');
-    
-    this.auth.getUserByEmail(this.email).subscribe((user) => {
-      console.log(user, 'userr');
-      
-      this.usuario = user;
+    this.auth.getCurrentUser().subscribe((user) => {
+      this.currentUser = user;
     });
   }
 
@@ -80,32 +69,44 @@ export class HomePage implements OnInit, OnDestroy {
 
   async toggleDetector() {
     if (this.isDetectorActive) {
-      const alert = await this.alertController.create({
-        cssClass: 'alert',
-        inputs: [
-          {
-            name: 'password',
-            type: 'password',
-            placeholder: 'Ingrese su contraseña',
-          },
-        ],
-        buttons: [
-          {
-            text: 'Continuar',
-            handler: (data) => {
-              console.log(this.usuario, 'aja, ', data, 'daataa');
-
-              if (data.password === this.usuario?.password) {
-                this.deactivateDetector();
-              } else {
-                this.triggerAlarm();
-              }
-            },
-          },
-        ],
+      const { value: password } = await Swal.fire({
+        title: 'Ingrese su contraseña para desactivar la alarma',
+        input: 'password',
+        inputPlaceholder: 'contraseña',
+        showCancelButton: true,
+        confirmButtonText: 'Continuar',
+        cancelButtonText: 'Cancelar',
+        heightAuto: false,
+        customClass: {
+          title: 'custom-alert-title',
+          confirmButton: 'custom-alert-confirm-btn ',
+        },
+        inputValidator: (value) => {
+          if (!value) {
+            return 'Necesita ingresar una contraseña!';
+          }
+          return '';
+        },
       });
 
-      await alert.present();
+      // Solo se ejecuta si el usuario ingresó una contraseña
+      if (password) {
+        if (password === this.currentUser?.clave.toString()) {
+          this.deactivateDetector();
+        } else {
+          this.triggerAlarm();
+          Swal.fire({
+            heightAuto: false,
+            icon: 'error',
+            title: 'Contraseña incorrecta',
+            text: 'La contraseña ingresada no es correcta. ¿¿¿¿ESTÁS INTENTANDO ROBAR????',
+            customClass: {
+              title: 'custom-alert-title',
+              confirmButton: 'custom-alert-confirm-btn ',
+            },
+          });
+        }
+      }
     } else {
       this.activateDetector();
     }
