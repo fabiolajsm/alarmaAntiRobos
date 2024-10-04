@@ -20,7 +20,10 @@
   </ion-header>
 
   <div id="container">
-    <strong>¿Listo para activar tu alarma anti robos?</strong>
+    <strong>
+      {{isDetectorActive ? 'Alarma activada' : '¿Listo para activar tu alarma
+      anti robos?'}}
+    </strong>
     <ion-button
       class="alarmBtn"
       [color]="isDetectorActive ? 'success' : 'light'"
