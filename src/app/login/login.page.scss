@@ -1,48 +1,47 @@
 .container {
-  background-color: #f8f9fa; // Un gris claro para un contraste suave
-  padding: 20px;
-  border-radius: 10px; // Bordes redondeados para un estilo más moderno
-  margin-top: 40px;
-  margin-left: 20px;
-  margin-right: 20px;
+  background-color: black; /* Fondo del contenedor */
+  padding: 40px; /* Aumentar padding */
+  border-radius: 15px; /* Bordes más redondeados */
+  margin: 20px; /* Márgenes alrededor del contenedor */
+  height: auto; /* Ajustar automáticamente a su contenido */
+  display: flex; /* Flex para centrar el contenido */
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
 }
 
 ion-title {
   font-family: "Ubuntu", sans-serif;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin: 10px 0;
   text-align: center;
-  color: #003566;
-  font-size: 25px;
+  color: #d9d9d9; /* Color de texto más claro */
+  font-size: 40px; /* Aumentar tamaño de fuente */
 }
 
 .text-access {
-  font-size: 20px;
-  margin: 30px 0;
-  color: #003566;
+  font-size: 30px; /* Aumentar tamaño de fuente */
+  margin: 40px 0; /* Aumentar margen */
+  color: #d9d9d9; /* Color de texto más claro */
 }
 
 .buttons-container {
   display: grid;
-  grid-template-columns: repeat(
-    2,
-    1fr
-  ); // Cambiado a 2 columnas para mejor ajuste
-  gap: 15px; // Espacio entre botones
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px; /* Aumentar espacio entre botones */
 }
 
 .btn {
-  background-color: #8d99ae;
+  background-color: #8d99ae; /* Color de fondo de los botones */
   color: black;
-  border-radius: 8px;
-  padding: 15px;
-  font-size: 16px;
+  border-radius: 10px; /* Aumentar radio de bordes */
+  padding: 20px; /* Aumentar padding */
+  font-size: 30px; /* Aumentar tamaño de fuente */
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s;
 
   &:hover {
-    background-color: #6c757d;
-    transform: scale(1.03);
+    background-color: #6c757d; /* Color al pasar el mouse */
+    transform: scale(1.05); /* Aumentar escala al pasar el mouse */
   }
 }
 
@@ -50,37 +49,38 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 30px;
 
   ion-input {
-    color: black;
+    color: #d9d9d9;
+    font-size: 30px;
 
     &:focus {
-      border-color: #003566;
-      box-shadow: 0 0 5px rgba(0, 53, 102, 0.5);
+      border-color: #003566; /* Color de borde en foco */
+      box-shadow: 0 0 5px rgba(0, 53, 102, 0.5); /* Sombra en foco */
     }
   }
 }
 
 #button {
   background-color: #003566;
-  color: #d9d9d9;
+  color: #d9d9d9; /* Color de texto claro */
   border: none;
-  font-size: 18px;
+  font-size: 30px; /* Aumentar tamaño de fuente */
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s;
   border-radius: 40px;
-  padding: 20px 30px;
-  margin-top: 20px;
+  padding: 25px 35px; /* Aumentar padding */
+  margin-top: 30px;
 
   &:hover {
-    transform: scale(1.03);
-    border: #0056b3 solid;
+    transform: scale(1.05);
+    border: #0056b3 solid; /* Borde en hover */
   }
 }
 
 .text-danger {
-  color: #dc3545;
+  color: #f4172d; /* Color de texto de error */
   text-align: center;
-  font-size: 17px;
+  font-size: 22px; /* Aumentar tamaño de fuente */
 }

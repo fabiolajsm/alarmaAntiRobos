@@ -46,6 +46,8 @@ $typing-speed: 0.1s;
   height: auto;
   margin-left: 15px;
   animation: zoom 1s ease-in-out forwards; /* Aplica la animación de zoom */
+  border-radius: 40%;
+  margin-right: 25px;
 }
 
 .text-container {
@@ -55,8 +57,8 @@ $typing-speed: 0.1s;
 }
 
 .typing {
-  font-size: 24px;
-  color: #333;
+  font-size: 40px;
+  color: #d9d9d9;
   white-space: normal;
   overflow: hidden;
   border-right: 2px solid;
@@ -66,7 +68,8 @@ $typing-speed: 0.1s;
 }
 
 .typing + h6 {
-  font-size: 16px;
+  font-size: 32px;
+  color: #d9d9d9;
   margin-top: 10px;
   animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
 }
